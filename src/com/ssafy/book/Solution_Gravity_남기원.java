@@ -60,7 +60,8 @@ public class Solution_Gravity_남기원 {
 		int size = scan.nextInt();
 		build(scan, size);
 		data = rotate(size);
-		int answer = findHeight(size) + 1;
+		int answer = findHeight(size);
+		answer = answer > 0 ? answer + 1 : 0;
 		System.out.println(answer);
 	}
 }

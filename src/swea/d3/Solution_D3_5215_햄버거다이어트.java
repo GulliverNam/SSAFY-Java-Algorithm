@@ -13,7 +13,6 @@ public class Solution_D3_5215_햄버거다이어트 {
 	public static int numDfs;
 	
 	public static int dfs(int cal_sum, int score_sum) {
-		System.out.println("numDfs "+numDfs++);
 		if(answer < score_sum) {
 			answer = score_sum;
 			return 0;

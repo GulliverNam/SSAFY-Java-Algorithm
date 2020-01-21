@@ -10,19 +10,29 @@ public class Solution_Gravity_남기원2 {
 	
 	public static int findHeight(Scanner s, int size) {
 		nums = new int[size];
-		int answer = 0;
-		for(int i = 0; i < size; i++)
+		for(int i=0; i<size; i++)
 			nums[i] = s.nextInt();
-		for (int i = 0; i < size-1; i++) {
-			if(nums[i] != 0) {
-				int temp = 0;
-				for (int j = i+1; j< size; j++) {
-					if(nums[i] > nums[j])
-						temp += 1;
-					else
-						break;
+		
+		int answer = 0;
+		int max_num = 0;
+		int cnt = 0;
+		boolean check = false;
+		for (int i = 0; i < size; i++) {
+			if(!check && nums[i] != 0) {
+				check = true;
+				max_num = nums[i];
+			}
+			else if(check) {
+				if(max_num <= nums[i]) {
+					answer = Math.max(answer, cnt);
+					max_num = nums[i];
+					cnt = 0;
 				}
-				answer = Math.max(answer, temp);
+				else if(nums[i] < max_num && i == size-1) {
+					answer = Math.max(answer, cnt + 1);
+				}
+				else
+					cnt += 1;
 			}
 		}
 		return answer;
@@ -32,7 +42,8 @@ public class Solution_Gravity_남기원2 {
 		System.setIn(new FileInputStream("res/book/gravity.txt"));
 		Scanner scan = new Scanner(System.in);
 		int size = scan.nextInt();
-		int answer = findHeight(scan, size) + 1;
+		int answer = findHeight(scan, size);
+		answer = answer > 0 ? answer + 1 : 0;
 		System.out.println(answer);
 	}
 
