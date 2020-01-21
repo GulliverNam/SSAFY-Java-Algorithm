@@ -28,11 +28,12 @@ public class Solution_Gravity_남기원2 {
 					max_num = nums[i];
 					cnt = 0;
 				}
-				else if(nums[i] < max_num && i == size-1) {
-					answer = Math.max(answer, cnt + 1);
+				else if(max_num > nums[i]) {
+					if(i == size-1)
+						answer = Math.max(answer, cnt + 1);
+					else
+						cnt += 1;
 				}
-				else
-					cnt += 1;
 			}
 		}
 		return answer;

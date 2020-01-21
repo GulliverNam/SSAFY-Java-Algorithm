@@ -31,24 +31,16 @@ public class Solution_Gravity_남기원 {
 		int answer = 0;
 		for(int i = 0; i < size; i++) {
 			boolean check = false;
-			int temp = 0;
-			int max = 0;
+			int cnt = 0;
 			for(int j=0; j < size; j++) {
 				if(!check && data[j][i] == 1)
 					check = true;
 				else if(check) {
-					if(j == size - 1) max = Math.max(max, temp+1);
-					else {
-						if(data[j][i] == 0)
-							temp += 1;
-						else {
-							max = Math.max(max, temp);
-							temp = 0;
-						}
-					}
+					if(data[j][i] == 0)
+						cnt += 1;
 				}
 			}
-			answer = Math.max(answer, max);
+			answer = Math.max(answer, cnt);
 		}
 		return answer;
 	}
@@ -61,7 +53,6 @@ public class Solution_Gravity_남기원 {
 		build(scan, size);
 		data = rotate(size);
 		int answer = findHeight(size);
-		answer = answer > 0 ? answer + 1 : 0;
 		System.out.println(answer);
 	}
 }
