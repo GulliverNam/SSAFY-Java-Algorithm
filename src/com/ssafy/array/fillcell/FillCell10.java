@@ -17,11 +17,35 @@ public class FillCell10 {
 	static int Answer1, Answer2;
 	public static void main(String[] args) {
 //		Scanner sc = new Scanner("8  3 3 3 1 1 2 2 1 1");
-		Scanner sc = new Scanner("8  3 1 3 4 2 1 1 4 1");
+		Scanner sc = new Scanner("8  3 1 3 4 2 1 1 4 2");
 //		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		int[][] map = new int[N][N];
-
+		
+		int r = sc.nextInt();
+		int c = sc.nextInt();
+		int num = sc.nextInt();
+		int dir[][] = {{0,1},{1,0},{0,-1},{-1,0}};
+		int selectDir, step, nr, nc;
+		
+		for(int i = 0; i < num; i++) {
+			selectDir = sc.nextInt();
+			step = sc.nextInt();
+			nr = r + dir[selectDir-1][0]*step;
+			nc = c + dir[selectDir-1][1]*step;
+			if(nr > -1 && nr < N && nc > -1 && nc < N) {
+				map[r][c] = 0;
+				map[nr][nc] = 1;
+				r = nr;
+				c = nc;
+			}
+			else {
+				Answer1 = Answer2 = -1;
+				break;
+			}
+		}
+		Answer1 = Answer1 != -1 ? r:-1;
+		Answer2 = Answer2 != -1 ? c:-1;
 		System.out.println("# 이동좌표 x :"+Answer1+ " y:"+Answer2);
 	}
 }
