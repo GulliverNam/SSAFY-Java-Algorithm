@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Solution_D2_1954_달팽이숫자 {
+public class Solution_D2_1954_달팽이숫자_남기원 {
 	public static void main(String[] args) throws FileNotFoundException {
 		System.setIn(new FileInputStream("res/swea/d2/Solution_D2_1954_달팽이숫자.txt"));
 		Scanner scan = new Scanner(System.in);
@@ -15,11 +15,11 @@ public class Solution_D2_1954_달팽이숫자 {
 			N = scan.nextInt();
 			snail = new int[N][N];
 			
-			int i = 1, x = 0, y = 0, d = 0;
+			int x = 0, y = 0, d = 0;
 			int nx, ny;
 			
-			snail[x][y] = i;
-			while(++i <= N*N) {
+			for (int i = 1; i <= N*N; i++) {
+				snail[x][y] = i;
 				nx = x + dir[d][0];
 				ny = y + dir[d][1];
 				if(nx == -1 || nx == N || ny == -1 || ny == N || snail[nx][ny] != 0) {
@@ -27,15 +27,14 @@ public class Solution_D2_1954_달팽이숫자 {
 					nx = x + dir[d][0];
 					ny = y + dir[d][1];
 				}
-				snail[nx][ny] = i;
 				x = nx;
 				y = ny;
 			}
+			
 			System.out.println("#"+test_case);
 			for (int a = 0; a < N; a++) {
 				for (int b = 0; b < N; b++)
-					System.out.printf("%4d", snail[a][b]);
-//					System.out.print(snail[a][b]+" ");
+					System.out.printf("%3d ", snail[a][b]);
 				System.out.println();
 			}
 			
