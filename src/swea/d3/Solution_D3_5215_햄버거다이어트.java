@@ -12,15 +12,16 @@ public class Solution_D3_5215_햄버거다이어트 {
 	public static int answer;
 	public static int numDfs;
 	
-	public static int dfs(int cal_sum, int score_sum) {
-		if(answer < score_sum) {
-			answer = score_sum;
+	public static int dfs(int cal_sum, int score_sum, int prev_score, int min) {
+		System.out.println(numDfs++);
+		if(cal_sum >= maxCal) {
+			answer = Math.max(answer, score_sum - prev_score);
 			return 0;
 		}else {
-			for(int i=0;i<N;i++) {
-				if(!check[i] && cal_sum+cals[i] < maxCal) {
+			for(int i=min;i<N;i++) {
+				if(!check[i]) {
 					check[i] = true;
-					dfs(cal_sum + cals[i], score_sum + scores[i]);
+					dfs(cal_sum + cals[i], score_sum + scores[i], scores[i], min + 1);
 					check[i] = false;
 				}
 			}
@@ -41,13 +42,15 @@ public class Solution_D3_5215_햄버거다이어트 {
             scores = new int[N];
             cals = new int[N];
             answer = 0;
+            numDfs = 0;
             for(int i = 0; i < N;i++) {
             	scores[i] = sc.nextInt();
             	cals[i] = sc.nextInt();
             }
-            dfs(0,0);
+            dfs(0,0,0,0);
             System.out.println("#"+test_case+" "+answer);
 		}
+		sc.close();
 	}
 
 }
