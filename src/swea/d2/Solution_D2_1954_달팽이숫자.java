@@ -15,11 +15,11 @@ public class Solution_D2_1954_달팽이숫자 {
 			N = scan.nextInt();
 			snail = new int[N][N];
 			
-			int i = 1, x = 0, y = 0, d = 0;
+			int x = 0, y = 0, d = 0;
 			int nx, ny;
 			
-			snail[x][y] = i;
-			while(++i <= N*N) {
+			for(int i = 1; i <= N*N; i++) {
+				snail[x][y] = i;
 				nx = x + dir[d][0];
 				ny = y + dir[d][1];
 				if(nx == -1 || nx == N || ny == -1 || ny == N || snail[nx][ny] != 0) {
@@ -27,7 +27,6 @@ public class Solution_D2_1954_달팽이숫자 {
 					nx = x + dir[d][0];
 					ny = y + dir[d][1];
 				}
-				snail[nx][ny] = i;
 				x = nx;
 				y = ny;
 			}
