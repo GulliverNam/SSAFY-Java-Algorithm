@@ -4,51 +4,36 @@ import java.io.FileInputStream;
 import java.util.Scanner;
 
 public class Solution_D3_5215_햄버거다이어트 {
-
-	public static boolean check[] = new boolean[20];
-	public static int scores[], cals[];
-	public static int N;
-	public static int maxCal;
-	public static int answer;
-	public static int numDfs;
 	
-	public static int dfs(int cal_sum, int score_sum, int prev_score, int min) {
-		System.out.println(numDfs++);
-		if(cal_sum >= maxCal) {
-			answer = Math.max(answer, score_sum - prev_score);
-			return 0;
-		}else {
-			for(int i=min;i<N;i++) {
-				if(!check[i]) {
-					check[i] = true;
-					dfs(cal_sum + cals[i], score_sum + scores[i], scores[i], min + 1);
-					check[i] = false;
-				}
-			}
-			return 0;
-		}
-	}
-	
-	public static void main(String args[]) throws Exception
-	{
+	public static void main(String args[]) throws Exception{
 		System.setIn(new FileInputStream("res/swea/d3/Solution_D3_5215_햄버거다이어트.txt"));
 		Scanner sc = new Scanner(System.in);
-		int T;
-		T=sc.nextInt();
-		for(int test_case = 1; test_case <= T; test_case++)
-		{
-            N = sc.nextInt();
-            maxCal = sc.nextInt();
-            scores = new int[N];
-            cals = new int[N];
-            answer = 0;
-            numDfs = 0;
-            for(int i = 0; i < N;i++) {
-            	scores[i] = sc.nextInt();
-            	cals[i] = sc.nextInt();
-            }
-            dfs(0,0,0,0);
-            System.out.println("#"+test_case+" "+answer);
+		int T = sc.nextInt();
+		int N, maxCal, answer, sumCals, sumScores;
+		int[] cals, scores;
+		for(int test_case = 1; test_case <= T; test_case++){
+			N = sc.nextInt();
+			maxCal = sc.nextInt();
+			cals = new int[N];
+			scores = new int[N];
+			answer = 0;
+			for (int i = 0; i < N; i++) {
+				scores[i] = sc.nextInt();
+				cals[i] = sc.nextInt();
+			}
+			
+			for (int i = 0, size = 1<<N; i < size; i++) {
+				sumCals = 0;
+				sumScores = 0;
+				for (int j = 0; j < N; j++) {
+					if((i & 1<<j) != 0) {
+						sumCals += cals[j];
+						sumScores += scores[j];
+					}
+				}
+				if(sumCals <= maxCal) answer = Math.max(answer, sumScores);
+			}
+			System.out.println("#"+test_case+" "+answer);
 		}
 		sc.close();
 	}

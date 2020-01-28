@@ -18,11 +18,7 @@ public class Solution_D2_1954_달팽이숫자_남기원 {
 			int x = 0, y = 0, d = 0;
 			int nx, ny;
 			
-<<<<<<< HEAD:src/swea/d2/Solution_D2_1954_달팽이숫자.java
-			for(int i = 1; i <= N*N; i++) {
-=======
 			for (int i = 1; i <= N*N; i++) {
->>>>>>> 6c4a318a8ea170897bef8707a7a3881cf98d7494:src/swea/d2/Solution_D2_1954_달팽이숫자_남기원.java
 				snail[x][y] = i;
 				nx = x + dir[d][0];
 				ny = y + dir[d][1];
