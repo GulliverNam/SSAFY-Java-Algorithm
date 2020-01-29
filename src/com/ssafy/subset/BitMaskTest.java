@@ -23,16 +23,16 @@ public class BitMaskTest {
 		 * 	0010 0000	= 8<<2 = 32 (8*4)
 		 */
 		int e = 8;
-		System.out.println("8>>2: "+(8>>2));
-		System.out.println("-8>>2: "+(-8>>2)); // 부호bit 유지
-		System.out.println("8<<2: "+(8<<2));
+		System.out.println("8>>2: "+(e>>2));
+		System.out.println("-8>>2: "+(-e>>2)); // 부호bit 유지
+		System.out.println("8<<2: "+(e<<2));
 		
 		/*
 		 * >>> n : 비트를 N번 오른쪽으로 이동 => 2의 n제곱으로 나눈 효과
 		 * 부호 bit를 0으로 채운다. -> 음수일 때 큰 양수로 변환
 		 */
-		System.out.println("8>>>2: "+(8>>>2));
-		System.out.println("-8>>>2: "+(-8>>>2));
+		System.out.println("8>>>2: "+(e>>>2));
+		System.out.println("-8>>>2: "+(-e>>>2));
 		System.out.println("-8>>2: "+Integer.toBinaryString(-8>>2)+" 맨 왼쪽 두 자리에 1이 채워짐"); // 부호bit 유지
 		System.out.println("-8>>>2: "+Integer.toBinaryString(-8>>>2)+" 맨 왼쪽 두 자리에 0이 채워짐");
 		
