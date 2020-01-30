@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class Solution_D5_9092_마라톤 {
+public class Solution_D5_9092_마라톤_주말예정 {
 	
 	static int N, K, points[][], distance[][];
 	static List<ArrayList<Integer>> select;

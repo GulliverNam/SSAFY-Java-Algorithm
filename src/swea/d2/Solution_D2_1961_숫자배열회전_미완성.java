@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Solution_D2_1961_숫자배열회전 {
+public class Solution_D2_1961_숫자배열회전_미완성 {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		System.setIn(new FileInputStream("res/swea/d2/Solution_D2_1961_숫자배열회전.txt"));

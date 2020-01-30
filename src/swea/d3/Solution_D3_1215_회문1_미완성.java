@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Solution_D3_1215_회문1 {
+public class Solution_D3_1215_회문1_미완성 {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		System.setIn(new FileInputStream("res/swea/d3/Solution_D3_1215_회문1.txt"));
