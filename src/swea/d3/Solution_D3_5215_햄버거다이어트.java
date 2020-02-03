@@ -11,12 +11,14 @@ public class Solution_D3_5215_햄버거다이어트 {
 		int T = sc.nextInt();
 		int N, maxCal, answer, sumCals, sumScores;
 		int[] cals, scores;
+		
 		for(int test_case = 1; test_case <= T; test_case++){
 			N = sc.nextInt();
 			maxCal = sc.nextInt();
 			cals = new int[N];
 			scores = new int[N];
-			answer = 0;
+			answer = 0;	
+			
 			for (int i = 0; i < N; i++) {
 				scores[i] = sc.nextInt();
 				cals[i] = sc.nextInt();

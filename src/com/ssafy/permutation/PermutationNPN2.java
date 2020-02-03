@@ -9,11 +9,11 @@ import java.util.Scanner;
  * @author: NamGiwon
  */
 
-public class PermutationNPN {
+public class PermutationNPN2 {
 	static int n;	// n개의 데이터로 순열 만들기
 	static int[] numbers;
 	static int testCase;
-	static boolean[] check;
+	static boolean[] selected;
 	
 	/**
 	 * 순열을 만들어주는 함수
@@ -22,15 +22,15 @@ public class PermutationNPN {
 	public static void permutation(int cnt) {
 		if(cnt == n) {
 			testCase++;
-			System.out.println(Arrays.toString(numbers));
+//			System.out.println(Arrays.toString(numbers));
 			return;
 		}
 		for(int i = 1; i <= n; i++) {
-			if(!check[i]) {
-				check[i] = true;
+			if(!selected[i]) {
+				selected[i] = true;
 				numbers[cnt] = i;
 				permutation(cnt+1);
-				check[i] = false;
+				selected[i] = false;
 			}
 		}
 	}
@@ -39,9 +39,16 @@ public class PermutationNPN {
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
 		numbers = new int[n];
-		check = new boolean[n+1];
+		selected = new boolean[n+1];
+		long start = System.currentTimeMillis();
 		permutation(0);
-		System.out.printf("%dP%d 순열이 생성된 횟수: %d", n, n, testCase);
+		long end = System.currentTimeMillis();
+		System.out.printf("%dP%d 순열이 생성된 횟수: %d\n", n, n, testCase);
+		// 순열 nPn 실행시간
+		// - 10P10: 106ms
+		// - 11P11: 1243ms
+		// -> 11부터 위험
+		System.out.println("실행시간: "+(end-start)+"ms");
 		sc.close();
 	}
 
