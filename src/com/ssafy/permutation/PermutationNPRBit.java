@@ -23,7 +23,7 @@ public class PermutationNPRBit {
 	public static void permutation(int cnt, int flag) {
 		if(cnt == r) {
 			testCase++;
-			System.out.println(Arrays.toString(numbers));
+//			System.out.println(Arrays.toString(numbers));
 			return;
 		}
 		for(int i = 1; i <= n; i++) {
@@ -39,8 +39,12 @@ public class PermutationNPRBit {
 		n = sc.nextInt();
 		r = sc.nextInt();
 		numbers = new int[r];
-		permutation(0, 0);
-		System.out.printf("%dP%d 순열이 생성된 횟수: %d", n, r, testCase);
+		long start = System.currentTimeMillis();
+		permutation(0,0);
+		long end = System.currentTimeMillis();
+		System.out.printf("%dP%d 순열이 생성된 횟수: %d\n", n, n, testCase);
+		// 순열 nPr 실행시간
+		System.out.println("실행시간: "+(end-start)+"ms");
 		sc.close();
 	}
 

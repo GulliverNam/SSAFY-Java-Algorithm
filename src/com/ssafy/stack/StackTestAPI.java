@@ -9,7 +9,7 @@ public class StackTestAPI {
 		// - 객체만 저장할 수 있음
 		// 		int -> Integer
 		// 		double -> Double
-		// 		byte -> Byte
+		// 		byte -> Byte 
 		// 		long -> Long
 		// - toString()이 제공되어 데이터를 출력할 수 있음
 		
@@ -27,11 +27,18 @@ public class StackTestAPI {
 		stk.push(2);
 		stk.push(3);
 		System.out.println(stk.toString());
-		// peek()			: 마지막 데이터를 제거하지 않고 return
+		
+		// clear() : 자료구조에 저장된 모든 원소를 제거하는 기능
+//		stk.clear();
+		
+		// 스택이 비어있는 경우 peek(), pop()을 호출하면 java.util.EmptyStackException 발생
+		;
+		
+		// peek() : 마지막 데이터를 제거하지 않고 return
 		System.out.println(stk.peek());
 		System.out.println(stk.peek());
 		System.out.println(stk.toString());
-		// pop()			: 마지막 데이터를 제거하고 return
+		// pop() : 마지막 데이터를 제거하고 return
 		System.out.println(stk.pop());
 		System.out.println(stk.pop());
 		System.out.println(stk.toString());

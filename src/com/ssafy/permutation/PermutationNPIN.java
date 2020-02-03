@@ -10,10 +10,10 @@ import java.util.Scanner;
  */
 
 public class PermutationNPIN {
+
 	static int n;	// n개의 데이터로 순열 만들기
 	static int[] numbers;
 	static int testCase;
-	
 	
 	/**
 	 * 순열을 만들어주는 함수
@@ -22,7 +22,7 @@ public class PermutationNPIN {
 	public static void permutation(int cnt) {
 		if(cnt == n) {
 			testCase++;
-			System.out.println(Arrays.toString(numbers));
+//			System.out.println(Arrays.toString(numbers));
 			return;
 		}
 		for(int i = 1; i <= n; i++) {
@@ -34,9 +34,17 @@ public class PermutationNPIN {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
+		long start = System.currentTimeMillis();
 		numbers = new int[n];
 		permutation(0);
+		long end = System.currentTimeMillis();
 		System.out.println("순열이 생성된 횟수: "+testCase);
+		// 중복순열 실행시간
+		// - 8ㅠ8: 0.032초
+		// - 9ㅠ9: 1초
+		// -> 9부터 위험
+		System.out.println("실행시간: " + (end-start)+"ms");
+		sc.close();
 	}
 
 }

@@ -4,10 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Solution_1296_View {
+public class Solution_D3_1296_View {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		System.setIn(new FileInputStream("res/swea/d3/Solution_1296_View.txt"));
+		System.setIn(new FileInputStream("res/swea/d3/Solution_D3_1296_View.txt"));
 		Scanner sc = new Scanner(System.in);
 		
 		int T = 10;

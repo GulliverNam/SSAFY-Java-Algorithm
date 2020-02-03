@@ -21,7 +21,7 @@ public class PermutationNPN1 {
 	public static void permutation(int cnt) {
 		if(cnt == n) {
 			testCase++;
-			System.out.println(Arrays.toString(numbers));
+//			System.out.println(Arrays.toString(numbers));
 			return;
 		}
 		top:
@@ -41,8 +41,15 @@ public class PermutationNPN1 {
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
 		numbers = new int[n];
+		long start = System.currentTimeMillis();
 		permutation(0);
-		System.out.printf("%dP%d 순열이 생성된 횟수: %d", n, n, testCase);
+		long end = System.currentTimeMillis();
+		System.out.printf("%dP%d 순열이 생성된 횟수: %d\n", n, n, testCase);
+		// 순열 nPn 실행시간
+		// - 10P10: 454ms
+		// - 11P11: 5.4s
+		// -> 11부터 위험
+		System.out.println("실행시간: "+(end-start)+"ms");
 		sc.close();
 	}
 

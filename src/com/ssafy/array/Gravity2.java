@@ -54,6 +54,7 @@ public class Gravity2 {
 		for (int[] box : map) {
 			System.out.println(Arrays.toString(box));
 		}
+		scan.close();
 	}
 }
 
