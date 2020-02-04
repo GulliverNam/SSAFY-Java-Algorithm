@@ -21,7 +21,6 @@ public class Solution_D4_1249_보급로 {
 			N = Integer.parseInt(br.readLine().trim());
 			Map = new int[N][N];
 			Visited = new boolean[N][N];
-			Answer = Integer.MAX_VALUE;
 			for (int i = 0; i < N; i++) {
 				str = br.readLine().trim();
 				for (int j = 0; j < N; j++) {
@@ -43,7 +42,7 @@ public class Solution_D4_1249_보급로 {
 			Visited[p.r][p.c] = true;
 			if(p.r == N-1 && p.c == N-1) {
 				Answer = p.cost;
-				break;
+				return;
 			}
 			for (int i = 0; i < 4; i++) {
 				nr = p.r + Dir[i][0];
@@ -60,8 +59,6 @@ public class Solution_D4_1249_보급로 {
 
 class Path implements Comparable<Path>{
 	public int r, c, cost;
-	
-	public Path() {}
 	
 	public Path(int r, int c, int cost) {
 		this.r = r;
