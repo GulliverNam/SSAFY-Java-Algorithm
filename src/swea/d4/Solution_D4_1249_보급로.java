@@ -38,7 +38,7 @@ public class Solution_D4_1249_보급로 {
 		queue.add(new Path(0,0,Map[0][0]));
 		Visited[0][0] = true;
 		int nr, nc;
-		while(!queue.isEmpty()) {
+		while(true) {
 			Path p = queue.poll();
 			Visited[p.r][p.c] = true;
 			if(p.r == N-1 && p.c == N-1) {
@@ -54,14 +54,10 @@ public class Solution_D4_1249_보급로 {
 			}
 		}
 	}
-
-
 }
 
 class Path implements Comparable<Path>{
 	public int r, c, cost;
-	
-	public Path() {}
 	
 	public Path(int r, int c, int cost) {
 		this.r = r;
@@ -73,5 +69,4 @@ class Path implements Comparable<Path>{
 	public int compareTo(Path o) {
 		return this.cost >= o.cost ? 1 : -1;
 	}
-	
 }
