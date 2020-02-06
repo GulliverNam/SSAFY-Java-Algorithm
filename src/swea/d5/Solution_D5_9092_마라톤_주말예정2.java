@@ -1,80 +1,104 @@
 package swea.d5;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
-public class Solution_D5_9092_마라톤_주말예정2 {
+public class Solution_D5_9092_마라톤_주말예정2{
 	
-	static int N, K, points[][], distance[][], Answer;
-
-	public static void main(String[] args) throws FileNotFoundException {
+	static int N, K, points[][], distance[][][], Answer;
+	static PriorityQueue<Path> Queue;
+	
+	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("res/swea/d5/Solution_D5_9092_마라톤.txt"));
-		Scanner sc = new Scanner(System.in);
-		
-		int T = sc.nextInt(), length;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		int T = Integer.parseInt(br.readLine().trim()), length;
 		for (int testCase = 1; testCase <= T; testCase++) {
-			N = sc.nextInt();
-			K = sc.nextInt();
+			st = new StringTokenizer(br.readLine().trim(), " ");
+			N = Integer.parseInt(st.nextToken());
+			K = Integer.parseInt(st.nextToken());
 			points = new int[N][2];
-			length = (N-1-K)*(K+1) + K*(K+1)/2;
-			distance = new int[length][3];
+			Answer = Integer.MAX_VALUE;
+			distance = new int[N-1][][];
 			for (int i = 0; i < N; i++) {
-				points[i][0] = sc.nextInt();
-				points[i][1] = sc.nextInt();
+				st = new StringTokenizer(br.readLine().trim(), " ");
+				points[i][0] = Integer.parseInt(st.nextToken());
+				points[i][1] = Integer.parseInt(st.nextToken());
 			}
 			
-			int idx = 0, max;
+			int idx, k = 0;
 			for (int i = 0; i < N-1; i++) {
-				max = i < N-1-K ? K+1+i : N-1;
-				for (int j = i+1; j <= max; j++) {
-					System.out.println(i+" "+j);
-					distance[idx][0] = i;
-					distance[idx][1] = j;
-					distance[idx++][2] = getDistance(i, j);
+				length = i < N-1-K ? K+1 : K+1-(++k);
+				distance[i] = new int[length][2];
+				idx = 0;
+				for (int j = i+1; j <= i+length; j++) {
+					distance[i][idx][0] = j;
+					distance[i][idx++][1] = getDistance(i, j);
 				}
 			}
 			
-			Arrays.sort(distance, new Comparator<int[]>() {
-				public int compare(int[] o1, int[] o2) {
-		            return Integer.compare(o1[2], o2[2]);
-		        }
-			});
-			
-			for (int i = 0; i < length; i++) {
-				System.out.println(Arrays.toString(distance[i]));
+			for (int i = 0; i < N-1; i++) {
+				Arrays.sort(distance[i], new Comparator<int[]>() {
+					public int compare(int[] o1, int[] o2) {
+			            return Integer.compare(o1[1], o2[1]);
+			        }
+				});
+//				for (int j = 0; j < distance[i].length; j++)
+//					System.out.println(i+" "+distance[i][j][0]+" "+distance[i][j][1]);
 			}
 			
+			findShortestPath();
 			System.out.println("#"+testCase+" "+Answer);
 			
 			
 		}
-		
-		sc.close();
 	}
 	
-//	private static void findShortestPath(int s, int d, int k) {
-//		if(s == N-1) {
-//			Answer = Math.min(Answer, d);
-//			return;
-//		}
-//		int nk;
-//		for (int i = 0; i < distance[s].length; i++) {
-//			nk = distance[s][i][0] - s - 1;
-//			if(nk+k > K)
-//				continue;
-//			findShortestPath(distance[s][i][0], d+distance[s][i][1], k+nk);
-////			if(Answer != Integer.MAX_VALUE)
-////				return;
-//		}
-//	}
+	private static void findShortestPath() {
+		Queue = new PriorityQueue<>();
+		for (int i = 0; i < distance[0].length; i++) {
+			Queue.add(new Path(i, distance[0][i][0], i-1, distance[0][i][1]));
+		}
+		Path p;
+		int j, k;
+		while(!Queue.isEmpty()) {
+			p = Queue.poll();
+			if(p.j == N-1) {
+				Answer = p.cost;
+				break;
+			}
+			for (int i = 0; i < distance[p.j].length; i++) {
+				j = distance[p.j][i][0];
+				k = j - p.j - 1;
+				if(p.k + k <=K) {
+					Queue.add(new Path(p.j, j, p.k+k, p.cost + distance[p.j][i][1]));
+				}
+			}
+		}
+	}
 
 	private static int getDistance(int i, int j) {
 		return Math.abs(points[i][0]-points[j][0])+Math.abs(points[i][1]-points[j][1]);
 	}
+}
 
+class Path implements Comparable<Path>{
+	public int i, j, k, cost;
 	
+	public Path(int r, int j, int k, int cost) {
+		this.i = r;
+		this.j = j;
+		this.k = k;
+		this.cost = cost;
+	}
+	
+	@Override
+	public int compareTo(Path o) {
+		return this.cost >= o.cost ? 1 : -1;
+	}
 }
