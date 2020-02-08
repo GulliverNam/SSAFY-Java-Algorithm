@@ -62,21 +62,22 @@ public class Solution_D5_9092_마라톤_주말예정2{
 	private static void findShortestPath() {
 		Queue = new PriorityQueue<>();
 		for (int i = 0; i < distance[0].length; i++) {
-			Queue.add(new Path(i, distance[0][i][0], i-1, distance[0][i][1]));
+			Queue.add(new Path(0, distance[0][i][0], distance[0][i][0]-1, distance[0][i][1]));
 		}
 		Path p;
-		int j, k;
+		int ni, nj, nk;
 		while(!Queue.isEmpty()) {
 			p = Queue.poll();
-			if(p.j == N-1) {
+			ni = p.j;
+			if(ni == N-1) {
 				Answer = p.cost;
-				break;
+				return;
 			}
-			for (int i = 0; i < distance[p.j].length; i++) {
-				j = distance[p.j][i][0];
-				k = j - p.j - 1;
-				if(p.k + k <=K) {
-					Queue.add(new Path(p.j, j, p.k+k, p.cost + distance[p.j][i][1]));
+			for (int index = 0; index < distance[ni].length; index++) {
+				nj = distance[ni][index][0];
+				nk = p.k + nj - ni - 1;
+				if(nk <=K) {
+					Queue.add(new Path(ni, nj, nk, p.cost + distance[ni][index][1]));
 				}
 			}
 		}
@@ -90,8 +91,8 @@ public class Solution_D5_9092_마라톤_주말예정2{
 class Path implements Comparable<Path>{
 	public int i, j, k, cost;
 	
-	public Path(int r, int j, int k, int cost) {
-		this.i = r;
+	public Path(int i, int j, int k, int cost) {
+		this.i = i;
 		this.j = j;
 		this.k = k;
 		this.cost = cost;
@@ -99,6 +100,7 @@ class Path implements Comparable<Path>{
 	
 	@Override
 	public int compareTo(Path o) {
-		return this.cost >= o.cost ? 1 : -1;
+		if(this.cost == o.cost) return this.i < o.i ? 1: -1;
+		return this.cost > o.cost ? 1 : -1;
 	}
 }
