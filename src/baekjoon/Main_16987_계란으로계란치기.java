@@ -3,8 +3,6 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class Main_16987_계란으로계란치기 {
@@ -29,8 +27,6 @@ public class Main_16987_계란으로계란치기 {
 		dfs(0);
 		System.out.println(Answer);
 	}
-
-	
 
 	private static void dfs(int index) {
 		if(index == N) {
