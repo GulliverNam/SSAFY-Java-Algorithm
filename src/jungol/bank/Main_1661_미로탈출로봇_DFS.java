@@ -32,11 +32,11 @@ public class Main_1661_미로탈출로봇_DFS {
 			}
 		}
 		dfs(sr, sc);
-		System.out.println(Answer);
+		System.out.println(Answer-1);
 	}
 	private static void dfs(int sr, int sc) {
 		LinkedList<int[]> stack = new LinkedList<>();
-		stack.push(new int[] {sr, sc, 0});
+		stack.push(new int[] {sr, sc, 1});
 		
 		int current[], r, c, nr, nc, cnt;
 		while(!stack.isEmpty()) {
@@ -49,14 +49,13 @@ public class Main_1661_미로탈출로봇_DFS {
 				Answer = Math.min(Answer, cnt);
 				continue;
 			}
-			if(Visit[r][c] == 0 || Visit[r][c] > cnt+1) {
-				Visit[r][c] = cnt+1;
-				
+			if(Visit[r][c] == 0 || Visit[r][c] > cnt) {
+				Visit[r][c] = cnt;
 				for (int i = 0; i < 4; i++) {
 					nr = r + Dir[i][0];
 					nc = c + Dir[i][1];
 					if(nr > 0 && nc > 0 && nr <= R && nc <= C &&
-					   (Visit[nr][nc] == 0 || Visit[nr][nc] > cnt+1) && Maze[nr][nc] == 0) {
+					   (Visit[nr][nc] == 0 || Visit[nr][nc] > cnt) && Maze[nr][nc] == 0) {
 						stack.push(new int[] {nr, nc, cnt+1});
 					}
 				}

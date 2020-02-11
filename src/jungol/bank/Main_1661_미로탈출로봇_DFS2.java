@@ -32,25 +32,24 @@ public class Main_1661_미로탈출로봇_DFS2 {
 				Maze[i][j] = c[j-1] - '0';
 			}
 		}
-		dfs(sr, sc, 0);
-		System.out.println(Answer);
+		dfs(sr, sc, 1);
+		System.out.println(Answer-1);
 	}
 	private static void dfs(int r, int c, int cnt) {
 		if(r == Dr && c == Dc) {
 			Answer = Math.min(Answer, cnt);
 			return;
 		}
-		if(cnt >= Answer) {
+		if(cnt >= Answer)
 			return;
-		}
-		if(Visit[r][c] == 0 || Visit[r][c] > cnt+1) {
-			Visit[r][c] = cnt + 1;
+		if(Visit[r][c] == 0 || Visit[r][c] > cnt) {
+			Visit[r][c] = cnt ;
 			int nr, nc;
 			for (int i = 0; i < 4; i++) {
 				nr = r + Dir[i][0];
 				nc = c + Dir[i][1];
 				if(nr > 0 && nc > 0 && nr <= R && nc <= C &&
-				   (Visit[nr][nc] == 0 || Visit[nr][nc] > cnt+1) && Maze[nr][nc] == 0) {
+				   (Visit[nr][nc] == 0 || Visit[nr][nc] > cnt) && Maze[nr][nc] == 0) {
 					dfs(nr,nc,cnt+1);
 				}
 			}

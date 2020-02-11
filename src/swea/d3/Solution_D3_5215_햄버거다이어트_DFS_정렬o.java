@@ -35,6 +35,7 @@ public class Solution_D3_5215_햄버거다이어트_DFS_정렬o {
 					return o1[1] > o2[1] ? 1 : -1;
 				}
 			});
+			
 			dfs(0, 0, 0);
 			System.out.println("#"+test_case+" "+answer);
 		}
