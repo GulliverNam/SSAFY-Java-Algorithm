@@ -20,29 +20,26 @@ public class Main_1828_냉장고_남기원 {
 			material[i][0] = Integer.parseInt(st.nextToken());
 			material[i][1] = Integer.parseInt(st.nextToken());
 		}
-		
 		Arrays.sort(material, new Comparator<int[]>() {
 			@Override
 			public int compare(int[] o1, int[] o2) {
-				if(o1[1] > o2[1])
-					return 1;
-				else if(o1[1] == o2[1])
-					return 0;
-				return -1;
+				if(o1[1] == o2[1])
+					return o1[0] - o2[0];
+				return o1[1] - o2[1];
 			}
 		});
-		
+		for (int i = 0; i < N; i++) {
+			System.out.println(Arrays.toString(material[i]));
+		}
 		int answer = 1;
 		int max = material[0][1];
-		for (int i = 1; i < N; i++) {
+		for (int i = 0; i < N; i++) {
 			if(max < material[i][0]) {
 				max = material[i][1];
 				answer++;
 			}
 		}
 		System.out.println(answer);
-		
-
 	}
 
 }
