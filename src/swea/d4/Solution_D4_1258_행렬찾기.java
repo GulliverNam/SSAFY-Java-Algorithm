@@ -12,7 +12,7 @@ public class Solution_D4_1258_행렬찾기 {
 	static int N, map[][];
 	static int dir[][] = {{0,1},{1,0}};
 	static boolean visit[][];
-	static LinkedList<Answer> answer;
+	static LinkedList<Rect> answer;
 	
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("res/swea/d4/Solution_D4_1258_행렬찾기.txt"));
@@ -23,7 +23,7 @@ public class Solution_D4_1258_행렬찾기 {
 			N = Integer.parseInt(br.readLine().trim());
 			map = new int[N+2][N+2];
 			visit = new boolean[N+2][N+2];
-			answer = new LinkedList<Answer>();
+			answer = new LinkedList<Rect>();
 			for (int i = 1; i <= N; i++) {
 				st = new StringTokenizer(br.readLine().trim());
 				for (int j = 1; j <= N; j++) {
@@ -39,17 +39,18 @@ public class Solution_D4_1258_행렬찾기 {
 				}
 			}
 			
-			answer.sort(new Comparator<Answer>() {
+			answer.sort(new Comparator<Rect>() {
 				@Override
-				public int compare(Answer o1, Answer o2) {
+				public int compare(Rect o1, Rect o2) {
 					if(o1.size == o2.size)
 						return o1.height - o2.height;
 					return o1.size - o2.size;
 				}
 			});
+			
 			System.out.print("#"+testCase+" "+answer.size()+" ");
-			for (int i = 0; i < answer.size(); i++)
-				System.out.print(answer.get(i).toString()+" ");
+			for (Rect r: answer)
+				System.out.print(r.toString()+" ");
 			System.out.println();
 		}
 	}
@@ -72,15 +73,15 @@ public class Solution_D4_1258_행렬찾기 {
 				nc += dir[d][1];
 			}
 		}
-		answer.add(new Answer(hcnt, wcnt));
+		answer.add(new Rect(hcnt, wcnt));
 	}
 	
-	static class Answer{
+	static class Rect{ // 멤버 클래스로 정의할 때 class에 static을 쓸 수 있음
 		int height;
 		int width;
 		int size;
 		
-		public Answer(int height, int width) {
+		public Rect(int height, int width) {
 			this.height = height;
 			this.width = width;
 			this.size = height * width;
