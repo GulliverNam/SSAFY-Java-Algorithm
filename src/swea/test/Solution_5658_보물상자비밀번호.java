@@ -42,7 +42,7 @@ public class Solution_5658_보물상자비밀번호 {
 			nums.sort(new Comparator<Long>() {
 				@Override
 				public int compare(Long o1, Long o2) {
-					return o1 < o2 ? 1 : -1;
+					return (int)(o1 - o2);
 				}
 			});
 			System.out.println("#"+testCase+" "+nums.get(K-1));
