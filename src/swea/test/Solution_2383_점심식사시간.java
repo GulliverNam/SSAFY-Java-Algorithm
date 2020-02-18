@@ -13,7 +13,7 @@ public class Solution_2383_점심식사시간 {
 	static int N, answer;
 	static LinkedList<People> peoples = new LinkedList<>();
 	static LinkedList<Stair> stairs = new LinkedList<>();
-	
+	static Comp comp = new Comp();
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("res/swea/test/Solution_2383_점심식사시간.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -67,12 +67,8 @@ public class Solution_2383_점심식사시간 {
 				distance(peoples.get(i), stairs.get(1));
 		}
 		LinkedList<People> peops = new LinkedList<People>(peoples);
-		Collections.sort(peops, new Comparator<People>() {
-			@Override
-			public int compare(People o1, People o2) {
-				return o1.time-o2.time;
-			}
-		});
+		
+		peops.sort(comp);
 		
 		int time = 0;
 		top:
@@ -121,7 +117,12 @@ public class Solution_2383_점심식사시간 {
 	private static void distance(People p, Stair s) {
 		p.time = Math.abs(p.r - s.r) + Math.abs(p.c - s.c);
 	}
-
+	static class Comp implements Comparator<People>{
+		@Override
+		public int compare(People o1, People o2) {
+			return o1.time-o2.time;
+		}
+	}
 	static class People{
 		int idx;
 		int r;
