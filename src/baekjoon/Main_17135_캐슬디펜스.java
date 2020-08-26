@@ -1,77 +1,81 @@
 package baekjoon;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main_17135_캐슬디펜스 {
-	static int N, M, D, answer, map[][];
+	
+	static int N, M, D, answer;
+	static int[][] map;
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/baekjoon/Main_17135_캐슬디펜스.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine().trim());
+		
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		D = Integer.parseInt(st.nextToken());
-		map = new int[N][M];
-		
-		for (int i = 0; i < N; i++) {
+		map = new int[N+1][M+1];
+		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine().trim());
-			for (int j = 0; j < M; j++)
+			for (int j = 1; j <= M; j++) {
 				map[i][j] = Integer.parseInt(st.nextToken());
+			}
 		}
-		
-		play(-1,0, new boolean[M]);
+		// 궁수 3명
+		archer(1, 0, 0);
 		System.out.println(answer);
 
 	}
 
-	private static void play(int idx, int cnt, boolean set[]) {
+	private static void archer(int start, int cnt, int pick) {
 		if(cnt == 3) {
-			attack(set);
+			answer = Math.max(answer, attack(pick));
 			return;
 		}
-		for (int i = idx+1; i < M; i++) {
-			set[i] = true;
-			play(i, cnt+1, set);
-			set[i] = false;
+		for (int j = start; j <= M; j++) {
+			if((pick & 1<<j) == 0) {
+				archer(j + 1, cnt + 1, pick | 1 << j);
+			}
 		}
 	}
 
-	private static void attack(boolean[] set) {
-		int nr, nc, num = 0;
-		int temp[][] = new int[N][M];
-		for (int i = 0; i < N; i++)
-			System.arraycopy(map[i], 0, temp[i], 0, M);
-		LinkedList<int[]> killed = new LinkedList<int[]>();
-		for (int r = N; r > 0; r--) {
-			for (int c = 0; c < M; c++) {
-				if(set[c]) {
-					top:
-					for (int d = 1; d <= D; d++) {
-						for (int k = -(d-1); k <= d-1; k++) {
-							nr = r - (d - Math.abs(k));
-							nc = c + k;
-							if(nr > -1 && nc > -1 && nc < M && temp[nr][nc] == 1) {
-								killed.add(new int[] {nr,nc});
-								break top;
-							}
+	private static int attack(int pick) {
+		int[][] temp = new int[N+1][M+1];
+		for (int i = 1; i <= N; i++) {
+			temp[i] = map[i].clone();
+		}
+		int[] archer = new int[3];
+		int idx = 0;
+		for (int i = 1; i <= M; i++) {
+			if((pick & 1<<i) != 0) {
+				archer[idx++] = i;
+			}
+		}
+		List<int[]> attacked = new ArrayList<int[]>();
+		int answer = 0;
+		for (int r = N+1; r > 0; r--) {
+			for (int c : archer) {
+				top:
+				for (int d = 1; d <= D; d++) {
+					for (int dc = -(d-1); dc <= d-1; dc++) {
+						int dr = - (d - Math.abs(dc));
+						int nr = r + dr;
+						int nc = c + dc; 
+						if(nr >= 1 && nr <= N && nc >= 1 && nc <= M && temp[nr][nc] != 0) {
+							attacked.add(new int[] {nr,nc});
+							break top;
 						}
 					}
 				}
 			}
-			int e[];
-			for (int i = 0, size = killed.size(); i < size; i++) {
-				e = killed.poll();
-				if(temp[e[0]][e[1]] == 1) {
-					temp[e[0]][e[1]] = 0;
-					num++;
-				}
+			for (int[] enemy : attacked) {
+				if(temp[enemy[0]][enemy[1]] != 0)
+					answer++;
+				temp[enemy[0]][enemy[1]] = 0;
 			}
+			attacked.clear();
 		}
-		answer = Math.max(answer, num);
+		return answer;
 	}
 
 }

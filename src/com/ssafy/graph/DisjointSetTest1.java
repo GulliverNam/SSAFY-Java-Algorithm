@@ -38,7 +38,7 @@ public class DisjointSetTest1 {
 	 */
 	public static void unionSet(int u, int v) {
 		// 각각의 노드들의 root 찾아서 parent 연결
-		parent[findSet(u)] = findSet(v);
+		parent[findSet(v)] = findSet(u);
 		//     ----------    ----------
 		//		u의 root		   v의 root
 	}

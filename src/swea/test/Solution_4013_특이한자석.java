@@ -17,7 +17,7 @@ public class Solution_4013_특이한자석 {
 		for (int tc = 1; tc <= T; tc++) {
 			K = Integer.parseInt(br.readLine().trim());
 			gear = new int[5][8];
-			starts  = new int[5];
+			starts = new int[5];
 			answer = 0;
 			for (int i = 1; i <= 4; i++) {
 				st = new StringTokenizer(br.readLine().trim());
@@ -43,7 +43,7 @@ public class Solution_4013_특이한자석 {
 				}
 				for (Integer j : change) {
 					t *= (-1);
-					starts[j] = starts[j] + t < 0 ? (starts[j] + 7) % 8 : (starts[j] + t) % 8; 
+					starts[j] = starts[j] + t < 0 ? 7 : (starts[j] + t) % 8; 
 				}
 				t = turn;
 				change.clear();
@@ -58,9 +58,9 @@ public class Solution_4013_특이한자석 {
 				}
 				for (Integer j : change) {
 					t *= (-1);
-					starts[j] = starts[j] + t < 0 ? (starts[j] + 7) % 8 : (starts[j] + t) % 8; 
+					starts[j] = starts[j] + t < 0 ? 7 : (starts[j] + t) % 8; 
 				}
-				starts[start] = starts[start] + turn < 0 ? (starts[start] + 7) % 8 : (starts[start] + turn) % 8;
+				starts[start] = starts[start] + turn < 0 ? 7: (starts[start] + turn) % 8;
 				change.clear();
 			}
 			for (int i = 1; i < 5; i++) {
